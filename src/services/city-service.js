@@ -11,7 +11,7 @@ class CityService {
             return city;
         } catch (error) {
             console.log("Something went wrong in service layer");
-            throw(error);
+            throw {error};
         }
     }
 
@@ -21,7 +21,7 @@ class CityService {
             return true;
         } catch (error) {
             console.log("Something went wrong in service layer");
-            throw(error); 
+            throw {error}; 
         }
     }
 
@@ -31,7 +31,7 @@ class CityService {
            return city; 
         } catch (error) {
             console.log("Something went wrong in service layer");
-            throw(error);
+            throw {error};
         }
     }
 
@@ -41,9 +41,11 @@ class CityService {
             return city;
         } catch (error) {
             console.log("Something went wrong in service layer");
-            throw(error);
+            throw {error};
         }
     }
 }
 
-module.exports = CityService;
+module.exports = CityService; 
+
+// home-work: Everytime i created a cityService a new cityRepository willl created, how can we stop this.
