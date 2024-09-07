@@ -28,7 +28,7 @@
       your terminal and  executes `npx sequelize db:create`
       and then execute
 
-      `npx sequelize db:migrate`
+      `npx sequelize db:migrate `
     ...
 
   ## DB Design
