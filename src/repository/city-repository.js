@@ -20,7 +20,7 @@ class CityRepository {
             });
             return true;
         } catch (error) {
-             console.log("Something went wrong");
+            console.log("Something went wrong");
             throw(error);
         }
     }
