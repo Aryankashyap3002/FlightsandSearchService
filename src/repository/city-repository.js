@@ -7,7 +7,7 @@ class CityRepository {
             return city;
         } catch (error) {
             console.log("Something went wrong in repository layer");
-            throw {error};;
+            throw {error};
         }
     }
 
@@ -21,21 +21,26 @@ class CityRepository {
             return true;
         } catch (error) {
             console.log("Something went wrong in repository layer");
-            throw {error};;
+            throw {error};
         }
     }
 
     async updateCity(cityId, data) {
         try {
-            const city = await City.update(data, {
-                where: {
-                    id: cityId
-                }
-            });
+            // Below approach also work but will not return updated object.
+            // If u are using pgsql then returning: true can be used, else not.
+            // const city = await City.update(data, {
+            //     where: {
+            //         id: cityId
+            //     }
+            // });
+            const city = await City.findByPk(cityId);
+            city.name = data.name;
+            await city.save();
             return city;
         } catch (error) {
             console.log("Something went wrong in repository layer");
-            throw {error};;
+            throw {error};
         }
     }
 
@@ -45,7 +50,17 @@ class CityRepository {
             return city;
         } catch (error) {
             console.log("Something went wrong in repository layer");
-            throw {error};;
+            throw {error};
+        }
+    }
+
+    async getAllCities() {
+        try {
+            const cities = await City.findAll();
+            return cities;   
+        } catch (error) {
+            console.log("Something went wrong in repository layer");
+            throw {error};            
         }
     }
 }
