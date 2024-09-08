@@ -1,4 +1,5 @@
 const { City } = require('../models/index');
+const { Op } = require('sequelize');
 
 class CityRepository {
     async createCity({ name }) {
@@ -54,15 +55,26 @@ class CityRepository {
         }
     }
 
-    async getAllCities() {
+    async getAllCities(filter) { // fetch can be empty also
         try {
-            const cities = await City.findAll();
+            let whereClause = {};
+            
+            if (filter.name) {
+                whereClause = {
+                    name: {
+                        [Op.like]: `${filter.name}%` // This will match any name starting with the filter name
+                    }
+                };
+            }
+    
+            const cities = await City.findAll({ where: whereClause });
             return cities;   
         } catch (error) {
             console.log("Something went wrong in repository layer");
-            throw {error};            
+            throw { error };            
         }
     }
+    
 }
 
 
